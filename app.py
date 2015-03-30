@@ -27,15 +27,19 @@ def search():
     tweets = api.GetSearch(
         term=term,
         result_type="recent",
-        count=100
-    )
+        count=100)
     dict_tweets = map(lambda t: t.AsDict(), tweets)
-    return {
+
+    result = {
         "query": {
             "term": term
         },
         "results": dict_tweets
     }
+
+    response.content_type = "application/json"
+
+    return json.dumps(result, ensure_ascii=False)
 
 
 if __name__ == "__main__":
