@@ -27,7 +27,7 @@ def search():
     tweets = api.GetSearch(
         term=term,
         result_type="recent",
-        count=100)
+        count=10)
     dict_tweets = map(lambda t: t.AsDict(), tweets)
 
     result = {
