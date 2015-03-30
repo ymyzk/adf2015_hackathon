@@ -13,11 +13,21 @@ api = twitter.Api(consumer_key="uQ644CuFtyY1L9Q4eGQbFNx5B",
         access_token_secret="S5j63eT3eiUaVsv9WezxdTzaDa3hVf6CRQEDnoQqyhMef")
 
 
+@route("/")
+def index():
+    return {"message": "API Server Running"}
+
+
 @route('/search')
 def search():
     term = "adf2015"
     tweets = map(lambda t: t.AsDict(), api.GetSearch(term=term))
-    return tweets
+    return {
+        "query": {
+            "term": term
+        },
+        "results": tweets
+    }
 
 
 if __name__ == "__main__":
