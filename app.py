@@ -7,10 +7,11 @@ from bottle import request, response, route, run
 import twitter
 
 
-api = twitter.Api(consumer_key="uQ644CuFtyY1L9Q4eGQbFNx5B",
-        consumer_secret="sCkTpWUZ42myubNOjJLaAs1lkIGWym4rg5rqqFZFBVU1d7i5GE",
-        access_token_key="2338692848-nhxkktgVNGZycQhfdobwmMeceaCeJerwb4KhcIF",
-        access_token_secret="S5j63eT3eiUaVsv9WezxdTzaDa3hVf6CRQEDnoQqyhMef")
+api = twitter.Api(
+        consumer_key="",
+        consumer_secret="",
+        access_token_key="",
+        access_token_secret="")
 
 
 @route("/")
@@ -27,7 +28,7 @@ def search():
     tweets = api.GetSearch(
         term=term,
         result_type="recent",
-        count=10)
+        count=15)
     dict_tweets = map(lambda t: t.AsDict(), tweets)
 
     result = {
