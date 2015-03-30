@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 import json
 
-from bottle import response, route, run
+from bottle import request, response, route, run
 import twitter
 
 
@@ -20,13 +20,21 @@ def index():
 
 @route('/search')
 def search():
-    term = "adf2015"
-    tweets = map(lambda t: t.AsDict(), api.GetSearch(term=term))
+    term = request.query.q
+    if term == "":
+        term = "#adf2015"
+
+    tweets = api.GetSearch(
+        term=term,
+        result_type="recent",
+        count=100
+    )
+    dict_tweets = map(lambda t: t.AsDict(), tweets)
     return {
         "query": {
             "term": term
         },
-        "results": tweets
+        "results": dict_tweets
     }
 
 
